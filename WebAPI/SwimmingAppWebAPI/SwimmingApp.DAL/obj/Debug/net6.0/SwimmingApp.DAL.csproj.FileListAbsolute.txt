@@ -1,0 +1,15 @@
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\bin\Debug\net6.0\SwimmingApp.DAL.deps.json
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\bin\Debug\net6.0\SwimmingApp.DAL.dll
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\bin\Debug\net6.0\SwimmingApp.DAL.pdb
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\bin\Debug\net6.0\SwimmingApp.Abstract.dll
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\bin\Debug\net6.0\SwimmingApp.Abstract.pdb
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.csproj.AssemblyReference.cache
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.AssemblyInfoInputs.cache
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.AssemblyInfo.cs
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.csproj.CoreCompileInputs.cache
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.csproj.CopyComplete
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.dll
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\refint\SwimmingApp.DAL.dll
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\SwimmingApp.DAL.pdb
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.DAL\obj\Debug\net6.0\ref\SwimmingApp.DAL.dll

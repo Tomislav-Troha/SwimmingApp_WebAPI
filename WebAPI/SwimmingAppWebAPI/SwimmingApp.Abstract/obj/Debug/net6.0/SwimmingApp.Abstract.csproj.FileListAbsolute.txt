@@ -1,0 +1,12 @@
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\bin\Debug\net6.0\SwimmingApp.Abstract.deps.json
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\bin\Debug\net6.0\SwimmingApp.Abstract.dll
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\bin\Debug\net6.0\SwimmingApp.Abstract.pdb
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\SwimmingApp.Abstract.csproj.AssemblyReference.cache
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\SwimmingApp.Abstract.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\SwimmingApp.Abstract.AssemblyInfoInputs.cache
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\SwimmingApp.Abstract.AssemblyInfo.cs
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\SwimmingApp.Abstract.csproj.CoreCompileInputs.cache
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\SwimmingApp.Abstract.dll
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\refint\SwimmingApp.Abstract.dll
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\SwimmingApp.Abstract.pdb
+C:\Users\tomis\Desktop\IIP\WebAPI\SwimmingAppWebAPI\SwimmingApp.Abstract\obj\Debug\net6.0\ref\SwimmingApp.Abstract.dll
