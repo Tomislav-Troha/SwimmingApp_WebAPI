@@ -21,37 +21,55 @@ namespace SwimmingApp.DAL.Core
             _db = new NpgsqlConnection(configuration.GetConnectionString("SwimmingAplication"));
         }
 
-        public async Task<int> EditData(string command, object parms)
+        public async Task<DbInsertResult> InsertAsync(string command, object parms)
         {
-            int result;
+            var query = await _db.QueryAsync(command, parms);
+            var result = query.FirstOrDefault();
 
-            result = await _db.ExecuteAsync(command, parms);
+            if(result == null)
+            {
+                return new DbInsertResult(0, null, null);
+            }
+            var rowCount = Convert.ToInt32(result.RowCount);
+            if(rowCount > 0 )
+            {
+                return new DbInsertResult(rowCount, result.Id, result);
+            }
+            return new DbInsertResult(rowCount, null, result);
+        }
 
+        public async Task<IEnumerable<T>> GetAsync<T>(string command, object parms)
+        {
+            var result = await _db.QueryAsync<T>(command, parms);
             return result;
         }
 
-        public async Task<List<T>> GetAll<T>(string command, object parms)
+        public async Task<T> FindAsync<T>(string command, object parms)
         {
-            List<T> result = new List<T>();
-
-            result = (await _db.QueryAsync<T>(command, parms)).ToList();
-
-            return result;
+            var result = await _db.QueryAsync<T>(command, parms);
+            return result.FirstOrDefault();
         }
 
-        public async Task<T> GetAsync<T>(string command, object parms)
+        public async Task<int> UpdateAsync(string command, object parms)
         {
-            T result;
-
-            result = (await _db.QueryAsync<T>(command, parms).ConfigureAwait(false)).FirstOrDefault();
-
-            return result;
+            var query = await _db.QueryAsync(command, parms);
+            var result = query.FirstOrDefault();
+            if(result == null )
+            {
+                return 0;
+            }
+            return Convert.ToInt32(result.RowCount);
         }
 
-        public async Task<IEnumerable<T>> GetAsync2<T>(string procedureName, object param = null, CommandType? commandType = CommandType.StoredProcedure, int? commandTimeout = null)
+        public async Task<int> DeleteAsync(string command, object parms)
         {
-            var result = await _db.QueryAsync<T>(procedureName, param, commandType: commandType);
-            return result;
+            var query = await _db.QueryAsync(command, parms);
+            var result = query.FirstOrDefault();
+            if(result == null )
+            {
+                return 0;
+            }
+            return Convert.ToInt32(result.RowCount);
         }
     }
 }

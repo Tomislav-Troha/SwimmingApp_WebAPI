@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using SwimmingApp.DAL.Core;
 using SwimmingApp.DAL.Repositories.EmployeeService;
 using SwimmingApp.BL.Managers;
+using Microsoft.AspNetCore.Mvc.ViewComponents;
 
 internal class Program
 {
@@ -54,6 +55,8 @@ internal class Program
 
         services.AddScoped<IDbService, DbService>();
         services.AddScoped<IEmployeeService, EmployeeService>();
+        services.AddTransient<EmployeeManager>();
+       
 
 
         var app = builder.Build();

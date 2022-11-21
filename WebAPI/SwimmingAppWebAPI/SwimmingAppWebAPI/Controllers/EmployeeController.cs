@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwimmingApp.Abstract.Data;
+using SwimmingApp.Abstract.DTO;
+using SwimmingApp.BL.Managers;
 using SwimmingApp.DAL.Repositories.EmployeeService;
 
 namespace SwimmingAppWebAPI.Controllers
@@ -8,20 +10,19 @@ namespace SwimmingAppWebAPI.Controllers
     [ApiController]
     public class EmployeeController : Controller
     {
-        private readonly IEmployeeService _employeeService;
-
-        public EmployeeController(IEmployeeService employeeService)
+        private readonly EmployeeManager _employeeManager;
+        public EmployeeController(EmployeeManager employeeManager) 
         {
-            _employeeService = employeeService; 
+            _employeeManager = employeeManager;
         }
 
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEmployee()
+        public async Task<IActionResult> GetAllEmployee(int? id = null)
         {
             try
             {
-                var result = await _employeeService.GetEmployeeList();
+                var result = await _employeeManager.GetEmployee(id);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -30,26 +31,13 @@ namespace SwimmingAppWebAPI.Controllers
             }
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> GetEmployee(int id)
-        {
-            try
-            {
-                var result = await _employeeService.GetEmployee(id);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee([FromBody]Employee employee)
+        public async Task<IActionResult> PostEmployee(EmployeeDTO employeeDTO)
         {
             try
             {
-                var result = await _employeeService.CreateEmployee(employee);
+                var result = await _employeeManager.InsertEmplyee(employeeDTO);
                 return Ok(result);
             }
             catch (Exception ex)
@@ -63,8 +51,8 @@ namespace SwimmingAppWebAPI.Controllers
         {
             try
             {
-                var result = await _employeeService.DeleteEmployee(id);
-                return Ok(result);
+                await _employeeManager.DeleteEmployee(id);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -73,12 +61,12 @@ namespace SwimmingAppWebAPI.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateEmployee([FromBody]Employee employee)
+        public async Task<IActionResult> UpdateEmployee(EmployeeDTO employeeDTO)
         {
             try
             {
-                var result = await _employeeService.UpdateEmployee(employee);
-                return Ok(result); 
+                var result = await _employeeManager.UpdateEmplyee(employeeDTO);
+                return Ok(result);
             }
             catch (Exception ex)
             {
