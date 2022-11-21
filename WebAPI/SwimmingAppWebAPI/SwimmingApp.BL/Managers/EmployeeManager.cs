@@ -1,9 +1,10 @@
 ﻿using SwimmingApp.Abstract.DataModel;
+using SwimmingApp.Abstract.DTO;
 using SwimmingApp.DAL.Repositories.EmployeeService;
 
 namespace SwimmingApp.BL.Managers
 {
-    public class EmployeeManager
+    public class EmployeeManager : IEmployeeManager
     {
         private readonly IEmployeeService _employeeService;
 
@@ -12,17 +13,33 @@ namespace SwimmingApp.BL.Managers
             _employeeService = employeeService;
         }
 
-        public async Task<bool> CreateEmployee(EmployeeModel employeeModel)
-        {
-            var employee = await _employeeService.CreateEmployee(employeeModel);
+        public async Task<IEnumerable<EmployeeDTO>> GetEmployee(int? id)
+        { 
+            var employee = await _employeeService.GetEmployee(id);
 
-            //List<TestDTO> testDTOs = new List<TestDTO>();
+            List<EmployeeDTO> testDTOs = new List<EmployeeDTO>();
 
-            //foreach (var test in testovi)
-            //{
-            //    testDTOs.Add(new TestDTO(test));
-            //}
-            return employee;
+            foreach (var test in employee)
+            {
+                testDTOs.Add(new EmployeeDTO(test));
+            }
+            return testDTOs;
         }
+
+        public async Task<EmployeeDTO> InsertEmplyee(EmployeeDTO employeeDTO)
+        {
+            return await _employeeService.InsertEmployee(employeeDTO);
+        }
+
+        public async Task<EmployeeDTO> UpdateEmplyee(EmployeeDTO employeeDTO)
+        {
+            return await _employeeService.UpdateEmployee(employeeDTO);
+        }
+
+        public async Task DeleteEmployee(int id)
+        {
+            await _employeeService.DeleteEmployee(id);
+        }
+
     }
 }

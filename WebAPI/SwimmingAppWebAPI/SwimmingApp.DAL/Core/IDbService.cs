@@ -11,11 +11,13 @@ namespace SwimmingApp.DAL.Core
 {
     public interface IDbService
     {
-        Task<T> GetAsync<T>(string command, object parms);
-        Task<List<T>> GetAll<T>(string command, object parms);
-        Task<int> EditData(string command, object parms);
+        Task<IEnumerable<T>> GetAsync<T>(string command, object parms);
+        Task<T> FindAsync<T>(string command, object parms);
+        Task<int> UpdateAsync(string command, object parms);
+        Task<DbInsertResult> InsertAsync(string command, object parms);
+        Task<int> DeleteAsync(string command, object parms);    
 
-        Task<IEnumerable<T>> GetAsync2<T>(string procedureName, object param = null, CommandType? commandType = CommandType.StoredProcedure, int? commandTimeout = null);
+        //"*445jasammaliled883"
 
     }
 }

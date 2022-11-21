@@ -1,5 +1,6 @@
 ﻿using SwimmingApp.Abstract.Data;
 using SwimmingApp.Abstract.DataModel;
+using SwimmingApp.Abstract.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +11,14 @@ namespace SwimmingApp.DAL.Repositories.EmployeeService
 {
     public interface IEmployeeService
     {
-        Task<bool> CreateEmployee(Employee employee);
+        Task<EmployeeDTO> InsertEmployee(EmployeeDTO employeeDTO);
 
-        Task<List<Employee>> GetEmployeeList();
+        Task<EmployeeDTO> UpdateEmployee(EmployeeDTO employeeDTO);
 
-        Task<Employee> GetEmployee(int id);
+        Task<IEnumerable<EmployeeModel>> GetEmployee(int? id);
 
-        Task<Employee> UpdateEmployee(Employee employee);
+        Task DeleteEmployee(int id);
 
-        Task<bool> DeleteEmployee(int key);
+       
     }
 }

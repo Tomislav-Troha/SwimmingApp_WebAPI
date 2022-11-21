@@ -1,9 +1,12 @@
-﻿using SwimmingApp.Abstract.Data;
+﻿using Dapper;
+using SwimmingApp.Abstract.Data;
 using SwimmingApp.Abstract.DataModel;
+using SwimmingApp.Abstract.DTO;
 using SwimmingApp.DAL.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,45 +21,53 @@ namespace SwimmingApp.DAL.Repositories.EmployeeService
         {
             _dbService = dbService;
         }
-        public async Task<bool> CreateEmployee(Employee employee)
-        {
-            var result =
-                await _dbService.EditData(
-                    "CALL Employee_Insert (@password, @name, @adress, @mobile, @email)", employee);
 
-            return true;
+       public async Task<IEnumerable<EmployeeModel>> GetEmployee(int? id)
+        {
+            DynamicParameters param = new DynamicParameters();
+            param.Add("id", id);
+
+            return  await _dbService.GetAsync<EmployeeModel>(
+                     "SELECT * FROM Employee_SelectOne(@id)", param);
+            
         }
 
-        public async Task<List<Employee>> GetEmployeeList()
+        public async Task<EmployeeDTO> UpdateEmployee(EmployeeDTO employeeDTO)
         {
-            var employeeList = await _dbService.GetAll<Employee>("select * from Employee_Select()", new { });
+            DynamicParameters param = new DynamicParameters();
+            param.Add("id", employeeDTO.Id);
+            param.Add("password", employeeDTO.Password);
+            param.Add("name", employeeDTO.Name);
+            param.Add("adress", employeeDTO.Adress);
+            param.Add("mobile", employeeDTO.Mobile);
+            param.Add("email", employeeDTO.Email);
 
-            return employeeList;
-        }
-        public async Task<Employee> GetEmployee(int id)
-        {
-            var result =
-                 await _dbService.GetAsync<Employee>(
-                     "SELECT * FROM Employee_SelectOne(@id)", new { id });
-            return result;
-        }
+            await _dbService.UpdateAsync(
+                "CALL Employee_Update(@id, @password, @name, @adress, @mobile, @email)", param);
 
-        public async Task<Employee> UpdateEmployee(Employee employee)
-        {
-            var updateEmployee = await _dbService.EditData(
-                "CALL Employee_Update(@id, @password, @name, @adress, @mobile, @email)", employee);
-            return employee;
+            return employeeDTO;
         }
 
-        public async Task<bool> DeleteEmployee(int id)
+        public async Task<EmployeeDTO> InsertEmployee(EmployeeDTO employeeDTO)
         {
-            var result =
-                await _dbService.EditData(
-                    "CALL Employee_Delete(@id)", new { id });
+            DynamicParameters param = new DynamicParameters();
+            param.Add("password", employeeDTO.Password);
+            param.Add("name", employeeDTO.Name);
+            param.Add("adress", employeeDTO.Adress);
+            param.Add("mobile", employeeDTO.Mobile);
+            param.Add("email", employeeDTO.Email);
 
-            return true;
+            await _dbService.InsertAsync("CALL Employee_Insert(@password, @name, @adress, @mobile, @email)", param);
+
+            return employeeDTO;
         }
 
-
+        public async Task DeleteEmployee(int id)
+        {
+            DynamicParameters param = new DynamicParameters();
+            param.Add("id", id);
+            
+            await _dbService.DeleteAsync("CALL Employee_Delete(@id)", param);
+        }
     }
 }
