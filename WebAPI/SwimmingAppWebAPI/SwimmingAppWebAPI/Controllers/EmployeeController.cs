@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SwimmingApp.Abstract.Data;
 using SwimmingApp.Abstract.DTO;
-using SwimmingApp.BL.Managers;
-using SwimmingApp.DAL.Repositories.EmployeeService;
+using SwimmingApp.BL.Managers.EmployeeManager;
 
 namespace SwimmingAppWebAPI.Controllers
 {

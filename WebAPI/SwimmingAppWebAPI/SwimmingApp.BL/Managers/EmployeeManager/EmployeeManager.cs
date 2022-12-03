@@ -2,7 +2,7 @@
 using SwimmingApp.Abstract.DTO;
 using SwimmingApp.DAL.Repositories.EmployeeService;
 
-namespace SwimmingApp.BL.Managers
+namespace SwimmingApp.BL.Managers.EmployeeManager
 {
     public class EmployeeManager : IEmployeeManager
     {
@@ -14,16 +14,16 @@ namespace SwimmingApp.BL.Managers
         }
 
         public async Task<IEnumerable<EmployeeDTO>> GetEmployee(int? id)
-        { 
+        {
             var employee = await _employeeService.GetEmployee(id);
 
-            List<EmployeeDTO> testDTOs = new List<EmployeeDTO>();
+            List<EmployeeDTO> memberDTOs = new List<EmployeeDTO>();
 
-            foreach (var test in employee)
+            foreach (var employees in employee)
             {
-                testDTOs.Add(new EmployeeDTO(test));
+                memberDTOs.Add(new EmployeeDTO(employees));
             }
-            return testDTOs;
+            return memberDTOs;
         }
 
         public async Task<EmployeeDTO> InsertEmplyee(EmployeeDTO employeeDTO)

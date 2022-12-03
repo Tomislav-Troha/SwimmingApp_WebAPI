@@ -28,7 +28,7 @@ namespace SwimmingApp.DAL.Repositories.EmployeeService
             param.Add("id", id);
 
             return  await _dbService.GetAsync<EmployeeModel>(
-                     "SELECT * FROM Employee_SelectOne(@id)", param);
+                     "SELECT * FROM Employee_Select(@id)", param);
             
         }
 

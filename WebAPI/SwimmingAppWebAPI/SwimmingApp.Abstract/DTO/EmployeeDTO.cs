@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SwimmingApp.Abstract.DTO
 {
-    public class EmployeeDTO
+    public class EmployeeDTO : EmployeeModel
     {
         public EmployeeDTO(EmployeeModel employeeModel)
         {
@@ -21,11 +21,5 @@ namespace SwimmingApp.Abstract.DTO
 
         public EmployeeDTO() { }
 
-        public int Id { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
-        public string Adress { get; set; }
-        public string Mobile { get; set; }
-        public string Email { get; set; }
     }
 }
