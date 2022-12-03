@@ -14,6 +14,9 @@ using Microsoft.AspNetCore.Mvc.ViewComponents;
 using SwimmingApp.DAL.Repositories.MemberService;
 using SwimmingApp.BL.Managers.EmployeeManager;
 using SwimmingApp.BL.Managers.MemberManager;
+using SwimmingApp.DAL.Repositories.UserRegisterService;
+using SwimmingApp.DAL.Repositories.UserService;
+using SwimmingApp.BL.Managers.UserRegisterManager;
 
 internal class Program
 {
@@ -63,7 +66,15 @@ internal class Program
 
         services.AddScoped<IMemberService, MemberService>();
         services.AddTransient<MemberManager>();
-       
+
+        services.AddScoped<IUserService, UserService>();
+        services.AddTransient<UserRegisterService>();
+        services.AddScoped<IUserRegisterService, UserRegisterService>();
+        services.AddTransient<UserRegisterManager>();
+
+
+
+
 
 
         var app = builder.Build();

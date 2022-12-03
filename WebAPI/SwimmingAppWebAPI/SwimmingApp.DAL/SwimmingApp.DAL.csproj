@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.0.123" />
+    <PackageReference Include="FluentValidation" Version="11.4.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0" />
     <PackageReference Include="Microsoft.IdentityModel.Protocols" Version="6.25.0" />
     <PackageReference Include="Npgsql" Version="7.0.0" />
@@ -32,6 +33,12 @@
 
   <ItemGroup>
     <Folder Include="Stores\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SwimmingApp.BL">
+      <HintPath>..\SwimmingApp.BL\bin\Debug\net6.0\SwimmingApp.BL.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
