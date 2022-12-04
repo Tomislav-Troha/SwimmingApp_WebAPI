@@ -18,6 +18,7 @@ namespace SwimmingApp.Abstract.DTO
             Username = userModel.Username;
             Password = userModel.Password;
             Adress = userModel.Adress;
+            UserRoleModel = userModel.UserRoleModel != null ? new UserRoleDTO(userModel.UserRoleModel) : null;
         }
 
         public UserDTO()

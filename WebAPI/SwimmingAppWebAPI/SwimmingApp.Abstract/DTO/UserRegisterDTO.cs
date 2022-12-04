@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SwimmingApp.Abstract.Data;
+using SwimmingApp.Abstract.DataModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +8,23 @@ using System.Threading.Tasks;
 
 namespace SwimmingApp.Abstract.DTO
 {
-    public class UserRegisterDTO
+    public class UserRegisterDTO : UserRegisterModel
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public string Email { get; set; }
-        public string Username { get; set; }
-        public string Adress { get; set; }
+        public UserRegisterDTO(UserRegisterModel userRegisterModel)
+        {
+            Name= userRegisterModel.Name;
+            Surname= userRegisterModel.Surname;
+            Email= userRegisterModel.Email;
+            Password= userRegisterModel.Password;
+            Username= userRegisterModel.Username;
+            Adress= userRegisterModel.Adress;
+            UserRole= userRegisterModel.UserRole != null ? new UserRoleDTO(userRegisterModel.UserRole) : null;
+        }
+
+        public UserRegisterDTO()
+        {
+
+        }
+      
     }
 }

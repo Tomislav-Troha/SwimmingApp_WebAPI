@@ -4,9 +4,11 @@ CREATE TABLE "User" (
   "surname" varchar,
   "email" varchar,
   "username" varchar,
-  "password" bit,
+  "password" bytea,
   "addres" varchar,
   "userRoleID" int
 );
 
 ALTER TABLE "User" ADD FOREIGN KEY ("userRoleID") REFERENCES "UserRole" ("id");
+
+ALTER TABLE "User" ALTER COLUMN password TYPE bytea USING password::TEXT::BYTEA;

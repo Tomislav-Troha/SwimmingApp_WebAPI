@@ -1,5 +1,6 @@
 ﻿using SwimmingApp.Abstract.DataModel;
 using SwimmingApp.Abstract.DTO;
+using SwimmingApp.BL.Utils;
 using SwimmingApp.DAL.Repositories.UserService;
 using SwimmingApp.DAL.Responses;
 using SwimmingApp.DAL.Validators;
@@ -23,14 +24,18 @@ namespace SwimmingApp.DAL.Repositories.UserRegisterService
                 //byte[] activationToken = PasswordManager.GenerateActivationToken();
 
                 //string encodedToken = WebEncoders.Base64UrlEncode(activationToken);
+                PasswordManager passwordManager = new PasswordManager();
+                byte[] hashPassword = passwordManager.GeneratePasswordHash(request.Password);
 
                 var userModel = new UserModel
                 {
                     Name = request.Name,
                     Surname = request.Surname,
                     Email = request.Email,
+                    Password = hashPassword,
                     Username = request.Username,
-                    Adress = request.Adress
+                    Adress = request.Adress,
+                    UserRoleID = request.UserRole.Id,
                 };
 
                 await _iuserService.InsertUser(userModel);

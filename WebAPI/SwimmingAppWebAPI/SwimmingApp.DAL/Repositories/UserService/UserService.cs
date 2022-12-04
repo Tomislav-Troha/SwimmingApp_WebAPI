@@ -1,6 +1,7 @@
 ﻿using Dapper;
 using Microsoft.IdentityModel.Tokens;
 using SwimmingApp.Abstract.DataModel;
+using SwimmingApp.DAL.Contex;
 using SwimmingApp.DAL.Core;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace SwimmingApp.DAL.Repositories.UserService
     public class UserService : IUserService
     {
         private readonly IDbService _db;
-        public UserService(IDbService dbService)
+        private readonly DapperContext _contex;
+        public UserService(IDbService dbService, DapperContext context)
         {
             _db = dbService;
+            _contex = context;
         }
 
         public Task<UserModel> DeleteUser(int id)
@@ -25,12 +28,21 @@ namespace SwimmingApp.DAL.Repositories.UserService
 
         public async Task<UserModel> GetByID(int id)
         {
-            var query = "SELECT * FROM \"User\" WHER id = @id";
-
             DynamicParameters param = new DynamicParameters();
             param.Add("id", id);
 
-            return await _db.FindAsync<UserModel>(query, param);
+            var query = "SELECT * FROM User_Select_ByID(@id)";
+
+            using var connection = _contex.CreateConnection();
+
+            IEnumerable<UserModel> users = await connection.QueryAsync<UserModel, UserRoleModel, UserModel>(query,
+                (user, userRole) =>
+                {
+                    user.UserRoleModel = userRole;
+                    return user;
+                }, param);
+
+            return users.FirstOrDefault();
         }
 
         public async Task<UserModel> GetUserByEmail(string email)
@@ -60,8 +72,9 @@ namespace SwimmingApp.DAL.Repositories.UserService
             param.Add("username", userModel.Username);
             param.Add("password", userModel.Password);
             param.Add("adress", userModel.Adress);
+            param.Add("userRoleID", userModel.UserRoleID);
 
-            await _db.InsertAsync("CALL User_Insert(@name, @surname, @email, @username, @password, @adress)", param);
+            await _db.InsertAsync("CALL User_Insert(@name, @surname, @email, @username, @password, @adress, @userRoleID)", param);
 
             return userModel;
         }

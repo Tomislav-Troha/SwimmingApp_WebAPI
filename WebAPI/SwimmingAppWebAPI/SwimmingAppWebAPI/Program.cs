@@ -17,6 +17,8 @@ using SwimmingApp.BL.Managers.MemberManager;
 using SwimmingApp.DAL.Repositories.UserRegisterService;
 using SwimmingApp.DAL.Repositories.UserService;
 using SwimmingApp.BL.Managers.UserRegisterManager;
+using SwimmingApp.BL.Managers.UserManager;
+using SwimmingApp.DAL.Contex;
 
 internal class Program
 {
@@ -59,6 +61,8 @@ internal class Program
         //services.AddScoped<IDataContex>(provider => provider.GetService<DataContex>());
         //services.AddScoped<IRepositroy, Respository>();
 
+        services.AddSingleton<DapperContext>();
+
         services.AddScoped<IDbService, DbService>();
 
         services.AddScoped<IEmployeeService, EmployeeService>();
@@ -68,12 +72,11 @@ internal class Program
         services.AddTransient<MemberManager>();
 
         services.AddScoped<IUserService, UserService>();
-        services.AddTransient<UserRegisterService>();
+        services.AddTransient<UserManager>();
+
         services.AddScoped<IUserRegisterService, UserRegisterService>();
         services.AddTransient<UserRegisterManager>();
-
-
-
+        
 
 
 

@@ -1,5 +1,7 @@
-﻿using SwimmingApp.Abstract.DTO;
+﻿using SwimmingApp.Abstract.DataModel;
+using SwimmingApp.Abstract.DTO;
 using SwimmingApp.DAL.Repositories.UserRegisterService;
+using SwimmingApp.DAL.Repositories.UserService;
 using SwimmingApp.DAL.Responses;
 using System;
 using System.Collections.Generic;
@@ -11,8 +13,8 @@ namespace SwimmingApp.BL.Managers.UserRegisterManager
 {
     public class UserRegisterManager
     {
-        private readonly UserRegisterService _userRegisterService;
-        public UserRegisterManager(UserRegisterService userRegisterService)
+        private readonly IUserRegisterService _userRegisterService;
+        public UserRegisterManager(IUserRegisterService userRegisterService)
         {
             _userRegisterService = userRegisterService;
         }
@@ -21,5 +23,6 @@ namespace SwimmingApp.BL.Managers.UserRegisterManager
         {
             return await _userRegisterService.UserRegister(request, adminID);   
         }
+
     }
 }

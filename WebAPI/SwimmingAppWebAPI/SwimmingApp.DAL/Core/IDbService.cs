@@ -15,9 +15,6 @@ namespace SwimmingApp.DAL.Core
         Task<T> FindAsync<T>(string command, object parms);
         Task<int> UpdateAsync(string command, object parms);
         Task<DbInsertResult> InsertAsync(string command, object parms);
-        Task<int> DeleteAsync(string command, object parms);    
-
-        //"*445jasammaliled883"
-
+        Task<int> DeleteAsync(string command, object parms);
     }
 }

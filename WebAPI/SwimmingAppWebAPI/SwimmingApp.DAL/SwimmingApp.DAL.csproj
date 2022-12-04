@@ -28,11 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SwimmingApp.Abstract\SwimmingApp.Abstract.csproj" />
+    <Folder Include="Stores\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Stores\" />
+    <ProjectReference Include="..\SwimmingApp.Abstract\SwimmingApp.Abstract.csproj" />
   </ItemGroup>
 
   <ItemGroup>
