@@ -24,6 +24,10 @@ using Swashbuckle.AspNetCore.Filters;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using SwimmingApp.DAL.Repositories.TrainingService;
+using SwimmingApp.BL.Managers.TrainingManager;
+using SwimmingApp.DAL.Repositories.AttendanceService;
+using SwimmingApp.BL.Managers.AttendanceManager;
 
 internal class Program
 {
@@ -100,8 +104,12 @@ internal class Program
 
         services.AddScoped<IUserLoginService, UserLoginService>();
         services.AddTransient<UserLoginManager>();
-        
 
+        services.AddScoped<ITrainingService, TrainingService>();
+        services.AddTransient<TrainingManager>();
+
+        services.AddScoped<IAttendanceService, AttendanceService>();
+        services.AddTransient<AttendanceManager>();
 
 
         var app = builder.Build();

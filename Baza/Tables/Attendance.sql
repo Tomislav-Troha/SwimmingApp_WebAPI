@@ -3,13 +3,14 @@ CREATE TABLE "Attendance" (
   "attDesc" varchar,
   "type" varchar,
   "memberID" int,
-  "trainingID" int
+  "trainingID" int,
+  "userID" int
 );
 
 ALTER TABLE "Attendance" ADD FOREIGN KEY ("employeeID") REFERENCES "Employee" ("id");
 
 ALTER TABLE "Attendance" ADD FOREIGN KEY ("memberID") REFERENCES "Member" ("id");
 
-ALTER TABLE "Attendance" ADD COLUMN "trainingID" int;
-
 ALTER TABLE "Attendance" ADD FOREIGN KEY ("trainingID") REFERENCES "Training" ("id");
+
+ALTER TABLE "Attendance" ADD FOREIGN KEY ("userID") REFERENCES "User" ("id");

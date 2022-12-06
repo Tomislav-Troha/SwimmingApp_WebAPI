@@ -9,5 +9,14 @@ namespace SwimmingApp.Abstract.DataModel
 {
     public class MemberModel : Member
     {
+        public MemberModel(MemberModel model)
+        {
+
+        }
+
+        public MemberModel()
+        {
+
+        }
     }
 }

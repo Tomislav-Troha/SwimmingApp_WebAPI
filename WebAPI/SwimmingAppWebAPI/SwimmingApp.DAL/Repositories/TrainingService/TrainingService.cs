@@ -1,5 +1,7 @@
-﻿using SwimmingApp.Abstract.DataModel;
+﻿using Dapper;
+using SwimmingApp.Abstract.DataModel;
 using SwimmingApp.Abstract.DTO;
+using SwimmingApp.DAL.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,24 +12,48 @@ namespace SwimmingApp.DAL.Repositories.TrainingService
 {
     public class TrainingService : ITrainingService
     {
-        public Task DeleteTraining(int id)
+        private readonly IDbService _db;
+        public TrainingService(IDbService dbService)
         {
-            throw new NotImplementedException();
+            _db = dbService;
+        }
+        public async Task DeleteTraining(int id)
+        {
+            DynamicParameters param = new DynamicParameters();
+            param.Add("id", id);
+
+            await _db.DeleteAsync("CALL Training_Delete(@id)", param);
         }
 
-        public Task<IEnumerable<TrainingModel>> GetTraining(int? id)
+        public async Task<IEnumerable<TrainingModel>> GetTraining(int? id)
         {
-            throw new NotImplementedException();
+            DynamicParameters param = new DynamicParameters();
+            param.Add("id", id);
+
+            return await _db.GetAsync<TrainingModel>("SELECT * FROM Training_Select(@id)", param);  
         }
 
-        public Task<TrainingDTO> InsertTraining(TrainingDTO trainingDTO)
+        public async Task<TrainingDTO> InsertTraining(TrainingDTO trainingDTO)
         {
-            throw new NotImplementedException();
+            DynamicParameters param = new DynamicParameters();
+            param.Add("code", trainingDTO.Code);
+            param.Add("name", trainingDTO.Name);
+
+            await _db.InsertAsync("CALL Training_Insert(@code, @name)", param);
+
+            return trainingDTO;
         }
 
-        public Task<TrainingDTO> UpdateTraining(TrainingDTO trainingDTO)
+        public async Task<TrainingDTO> UpdateTraining(TrainingDTO trainingDTO)
         {
-            throw new NotImplementedException();
+            DynamicParameters param = new DynamicParameters();
+            param.Add("id", trainingDTO.Id);
+            param.Add("code", trainingDTO.Code);
+            param.Add("name", trainingDTO.Name);
+
+            await _db.UpdateAsync("CALL Training_Update(@id, @code, @name)", param);
+
+            return trainingDTO;
         }
     }
 }

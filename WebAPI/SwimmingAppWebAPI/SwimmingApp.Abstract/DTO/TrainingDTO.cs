@@ -15,5 +15,10 @@ namespace SwimmingApp.Abstract.DTO
             Code = model.Code;
             Name = model.Name;
         }
+
+        public TrainingDTO()
+        {
+
+        }
     }
 }
