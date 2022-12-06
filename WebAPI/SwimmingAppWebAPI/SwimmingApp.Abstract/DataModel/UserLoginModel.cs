@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SwimmingApp.Abstract.DataModel
 {
-    public class EmployeeModel : Employee
+    public class UserLoginModel : UserLogin
     {
     }
 }

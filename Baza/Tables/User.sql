@@ -5,6 +5,7 @@ CREATE TABLE "User" (
   "email" varchar,
   "username" varchar,
   "password" bytea,
+  "salt" bytea,
   "addres" varchar,
   "userRoleID" int
 );
@@ -12,3 +13,5 @@ CREATE TABLE "User" (
 ALTER TABLE "User" ADD FOREIGN KEY ("userRoleID") REFERENCES "UserRole" ("id");
 
 ALTER TABLE "User" ALTER COLUMN password TYPE bytea USING password::TEXT::BYTEA;
+
+ALTER TABLE "User" ADD COLUMN salt bytea;

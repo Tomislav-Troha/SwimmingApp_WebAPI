@@ -14,6 +14,7 @@ namespace SwimmingApp.Abstract.Data
         public string Email { get; set; }
         public string Username { get; set; }
         public byte[] Password { get; set; }
+        public byte[] Salt { get; set; }
         public string Adress { get; set; } 
         public int UserRoleID { get; set; } 
     }

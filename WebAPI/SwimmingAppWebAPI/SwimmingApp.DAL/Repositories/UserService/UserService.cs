@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace SwimmingApp.DAL.Repositories.UserService
 {
@@ -40,7 +41,7 @@ namespace SwimmingApp.DAL.Repositories.UserService
                 {
                     user.UserRoleModel = userRole;
                     return user;
-                }, param);
+                }, param, splitOn: "roleid");
 
             return users.FirstOrDefault();
         }
@@ -50,17 +51,34 @@ namespace SwimmingApp.DAL.Repositories.UserService
             DynamicParameters param = new DynamicParameters();
             param.Add("email", email);
 
-            return await _db.FindAsync<UserModel>("SELECT * FROM User_Select_byEmail(@email)", param);
+            var query = "SELECT * FROM User_Select_byEmail(@email)";
+
+            using var connection = _contex.CreateConnection();
+
+            IEnumerable<UserModel> users = await connection.QueryAsync<UserModel, UserRoleModel, UserModel>(query,
+               (user, userRole) =>
+               {
+                   user.UserRoleModel = userRole;
+                   return user;
+               }, param, splitOn: "roleid");
+
+            return users.FirstOrDefault();
         }
 
-        public Task<UserModel> GetUserByUsername(string username)
+        public async Task<UserModel> GetUserByUsername(string username)
         {
-            throw new NotImplementedException();
+            DynamicParameters param = new DynamicParameters();
+            param.Add("username", username);
+
+            return await _db.FindAsync<UserModel>("SELECT * FROM User_Select_ByUsername(@username)", param);
         }
 
-        public Task<UserModel> GetUserLoginData(string username)
+        public async Task<UserModel> GetUserLoginData(string email)
         {
-            throw new NotImplementedException();
+            DynamicParameters param = new DynamicParameters();
+            param.Add("email", email);
+
+            return await _db.FindAsync<UserModel>("SELECT * FROM User_Select_LoginData(@email)", param);
         }
 
         public async Task<UserModel> InsertUser(UserModel userModel)
@@ -71,10 +89,11 @@ namespace SwimmingApp.DAL.Repositories.UserService
             param.Add("email", userModel.Email);
             param.Add("username", userModel.Username);
             param.Add("password", userModel.Password);
+            param.Add("salt", userModel.Salt);
             param.Add("adress", userModel.Adress);
             param.Add("userRoleID", userModel.UserRoleID);
 
-            await _db.InsertAsync("CALL User_Insert(@name, @surname, @email, @username, @password, @adress, @userRoleID)", param);
+            await _db.InsertAsync("CALL User_Insert(@name, @surname, @email, @username, @password, @adress, @userRoleID, @salt)", param);
 
             return userModel;
         }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace SwimmingApp.Abstract.Data
 {
-    public class UserRole
+    public class Training
     {
-        public int RoleId { get; set; }
-        public string RoleName { get; set; }
-        public string RoleDesc { get; set; }
+        public int Id {get; set; } 
+        public string Code { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -15,7 +15,7 @@ namespace SwimmingApp.Abstract.DTO
         }
         public UserRoleDTO(UserRoleModel userRoleModel)
         {
-            Id= userRoleModel.Id;
+            RoleId = userRoleModel.RoleId;
             RoleName= userRoleModel.RoleName;
             RoleDesc= userRoleModel.RoleDesc;
         }

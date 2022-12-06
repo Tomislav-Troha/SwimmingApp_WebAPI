@@ -8,17 +8,22 @@ using System.Configuration;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using SwimmingApp.DAL.Core;
-using SwimmingApp.DAL.Repositories.EmployeeService;
 using SwimmingApp.BL.Managers;
 using Microsoft.AspNetCore.Mvc.ViewComponents;
 using SwimmingApp.DAL.Repositories.MemberService;
-using SwimmingApp.BL.Managers.EmployeeManager;
 using SwimmingApp.BL.Managers.MemberManager;
 using SwimmingApp.DAL.Repositories.UserRegisterService;
 using SwimmingApp.DAL.Repositories.UserService;
 using SwimmingApp.BL.Managers.UserRegisterManager;
 using SwimmingApp.BL.Managers.UserManager;
 using SwimmingApp.DAL.Contex;
+using SwimmingApp.DAL.Repositories.UserLoginService;
+using SwimmingApp.BL.Managers.UserLoginManager;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 internal class Program
 {
@@ -39,19 +44,38 @@ internal class Program
 
         services.AddEndpointsApiExplorer();
 
-        services.AddSwaggerGen();
+        services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+            {
+                Description = "Standard Authorization header using the Bearer scheme",
+                In = ParameterLocation.Header,
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey
+            });
+            options.OperationFilter<SecurityRequirementsOperationFilter>();
+        });
+
+        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+     .AddJwtBearer(options =>
+     {
+         options.TokenValidationParameters = new TokenValidationParameters
+         {
+             ValidateIssuerSigningKey = true,
+             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Token"])),
+             ValidateIssuer = false,
+             ValidateAudience = false
+         };
+     });
+
         services.AddLogging();
-
-       
-
-
 
         services.AddControllers();
 
-        services.AddCors(c =>
+        services.AddCors(p => p.AddPolicy("corsapp", builder =>
         {
-            c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyHeader());
-        });
+            builder.WithOrigins("*").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }));
 
 
         services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
@@ -65,9 +89,6 @@ internal class Program
 
         services.AddScoped<IDbService, DbService>();
 
-        services.AddScoped<IEmployeeService, EmployeeService>();
-        services.AddTransient<EmployeeManager>();
-
         services.AddScoped<IMemberService, MemberService>();
         services.AddTransient<MemberManager>();
 
@@ -76,6 +97,9 @@ internal class Program
 
         services.AddScoped<IUserRegisterService, UserRegisterService>();
         services.AddTransient<UserRegisterManager>();
+
+        services.AddScoped<IUserLoginService, UserLoginService>();
+        services.AddTransient<UserLoginManager>();
         
 
 

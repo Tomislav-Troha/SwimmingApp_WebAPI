@@ -9,10 +9,10 @@ namespace SwimmingApp.BL.Utils
 {
     public class PasswordManager
     {
-        public byte[] GeneratePasswordHash(string password)
+        public byte[] GeneratePasswordHash(string password, byte[] salt)
         {
             var sha256 = SHA256.Create();
-            return sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+            return sha256.ComputeHash(Encoding.UTF8.GetBytes(password + salt));
         }
 
         public byte[] GenerateSaltHash()

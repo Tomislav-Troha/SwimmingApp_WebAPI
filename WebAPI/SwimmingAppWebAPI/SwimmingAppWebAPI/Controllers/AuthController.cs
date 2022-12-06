@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SwimmingApp.Abstract.DTO;
+using SwimmingApp.BL.Managers.UserLoginManager;
 using SwimmingApp.BL.Managers.UserRegisterManager;
 
 namespace SwimmingAppWebAPI.Controllers
@@ -10,13 +11,15 @@ namespace SwimmingAppWebAPI.Controllers
     {
     
         private readonly UserRegisterManager _userRegisterManager;
-        public AuthController(UserRegisterManager userRegisterManager)
+        private readonly UserLoginManager _userLoginManager;
+        public AuthController(UserRegisterManager userRegisterManager, UserLoginManager userLoginManager)
         {
             _userRegisterManager = userRegisterManager;
+            _userLoginManager = userLoginManager;
         }
 
 
-        [HttpPost]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(UserRegisterDTO userRegisterDTO)
         {
             try
@@ -29,7 +32,20 @@ namespace SwimmingAppWebAPI.Controllers
             {
                 return BadRequest(e);
             }
-           
+        }
+
+        [HttpPost("Login")]
+        public async Task<IActionResult> Login(UserLoginDTO login)
+        {
+            try
+            {
+                var response = await _userLoginManager.LoginUser(login);
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
         }
 
 
