@@ -1,15 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json.Serialization;
-using System.Data.Common;
-using System.Data;
-using System.Web.Http;
-using Microsoft.AspNetCore.Hosting;
-using System.Configuration;
-using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 using SwimmingApp.DAL.Core;
-using SwimmingApp.BL.Managers;
-using Microsoft.AspNetCore.Mvc.ViewComponents;
 using SwimmingApp.DAL.Repositories.MemberService;
 using SwimmingApp.BL.Managers.MemberManager;
 using SwimmingApp.DAL.Repositories.UserRegisterService;
@@ -37,13 +26,9 @@ internal class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
-
-       
-
+        // Add services to the container
         var services = builder.Services;
 
-        
         services.AddControllers();
 
         services.AddEndpointsApiExplorer();
@@ -60,34 +45,24 @@ internal class Program
             options.OperationFilter<SecurityRequirementsOperationFilter>();
         });
 
-        builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-     .AddJwtBearer(options =>
-     {
-         options.TokenValidationParameters = new TokenValidationParameters
-         {
-             ValidateIssuerSigningKey = true,
-             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Token"])),
-             ValidateIssuer = false,
-             ValidateAudience = false
-         };
-     });
-
-        services.AddLogging();
+        services.AddAuthentication(options => 
+        { 
+            options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+             .AddJwtBearer(options =>
+             {
+                 options.TokenValidationParameters = new TokenValidationParameters
+                 {
+                     ValidateIssuerSigningKey = true,
+                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["AppSettings:Token"])),
+                     ValidateIssuer = false,
+                     ValidateAudience = false
+                 };
+             });
 
         services.AddControllers();
-
-        services.AddCors(p => p.AddPolicy("corsapp", builder =>
-        {
-            builder.WithOrigins("*").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
-        }));
-
-
-        services.AddControllersWithViews().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore)
-            .AddNewtonsoftJson(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
-
-        //services.AddDbContext<DataContex>(c => c.UseNpgsql(builder.Configuration.GetConnectionString("SwimmingAplication")));
-        //services.AddScoped<IDataContex>(provider => provider.GetService<DataContex>());
-        //services.AddScoped<IRepositroy, Respository>();
 
         services.AddSingleton<DapperContext>();
 
@@ -111,41 +86,35 @@ internal class Program
         services.AddScoped<IAttendanceService, AttendanceService>();
         services.AddTransient<AttendanceManager>();
 
+        services.AddCors(p => p.AddPolicy("corsapp", builder =>
+        {
+            builder.WithOrigins("*").AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+        }));
 
         var app = builder.Build();
 
 
-        HttpConfiguration config = new HttpConfiguration();
-        config.MapHttpAttributeRoutes();
-
-        app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-
-        app.UseSwagger();
-        app.UseSwaggerUI(c =>
+        if (app.Environment.IsDevelopment())
         {
-            c.RoutePrefix = string.Empty;
-            c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI(v1)");
-        });
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.RoutePrefix = string.Empty;
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "WebAPI(v1)");
+            });
+        }
 
-        app.UseDeveloperExceptionPage();
-
-        app.UseRouting();
-        app.UseStaticFiles();
         app.UseHttpsRedirection();
-        app.UseAuthorization();
-        
 
+        app.UseAuthentication();
+
+        app.UseAuthorization();
+
+        app.UseCors("corsapp");
 
         app.MapControllers();
-     
-
+   
         app.Run();
 
-
-
     }
-
- 
-      
-    
 }

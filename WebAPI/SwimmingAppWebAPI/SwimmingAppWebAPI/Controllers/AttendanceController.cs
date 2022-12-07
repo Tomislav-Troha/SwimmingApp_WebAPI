@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SwimmingApp.Abstract.DTO;
 using SwimmingApp.BL.Managers.AttendanceManager;
 
@@ -15,13 +16,15 @@ namespace SwimmingAppWebAPI.Controllers
         }
 
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> InsertAttendance (AttendanceDTO attendanceDTO)
         {
             try
             {
-                int userID = 13;
-                var result = await _attendanceManager.InsertAttendance(attendanceDTO, userID);
+                var userId = HttpContext?.User.Claims.Where(x => x.Type == "UserID").Single();
+                //var userRoleId = HttpContext?.User.Claims.Where(x => x.Type == "UserRoleId").Single();
+                var result = await _attendanceManager.InsertAttendance(attendanceDTO, int.Parse(userId.Value));
                 return Ok(result);
             }
             catch (Exception e)
