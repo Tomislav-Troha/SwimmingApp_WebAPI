@@ -32,6 +32,37 @@ namespace SwimmingAppWebAPI.Controllers
                 return BadRequest(e);
             }
         }
+
+        [Authorize]
+        [HttpGet]
+        public async Task<IActionResult> GetAttendanceByUser()
+        {
+            try
+            {
+                var userId = HttpContext?.User.Claims.Where(x => x.Type == "UserID").Single();
+                var response = await _attendanceManager.GetAttendanceByUser(int.Parse(userId.Value));
+                return Ok(response);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [Authorize]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAttendance(int id)
+        {
+            try
+            {
+                await _attendanceManager.DeleteAttendance(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
         
     }
 }

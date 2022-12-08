@@ -37,7 +37,7 @@ namespace SwimmingApp.DAL.Repositories.TrainingService
         {
             DynamicParameters param = new DynamicParameters();
             param.Add("code", trainingDTO.Code);
-            param.Add("name", trainingDTO.Name);
+            param.Add("name", trainingDTO.TrainingType);
 
             await _db.InsertAsync("CALL Training_Insert(@code, @name)", param);
 
@@ -47,9 +47,9 @@ namespace SwimmingApp.DAL.Repositories.TrainingService
         public async Task<TrainingDTO> UpdateTraining(TrainingDTO trainingDTO)
         {
             DynamicParameters param = new DynamicParameters();
-            param.Add("id", trainingDTO.Id);
+            param.Add("id", trainingDTO.ID_training);
             param.Add("code", trainingDTO.Code);
-            param.Add("name", trainingDTO.Name);
+            param.Add("name", trainingDTO.TrainingType);
 
             await _db.UpdateAsync("CALL Training_Update(@id, @code, @name)", param);
 

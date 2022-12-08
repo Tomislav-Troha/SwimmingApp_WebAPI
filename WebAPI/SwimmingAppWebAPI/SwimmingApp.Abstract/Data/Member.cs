@@ -8,7 +8,7 @@ namespace SwimmingApp.Abstract.Data
 {
     public class Member
     {
-        public int Id { get; set; }
+        public int ID_member { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public DateTime MemberFrom { get; set; }

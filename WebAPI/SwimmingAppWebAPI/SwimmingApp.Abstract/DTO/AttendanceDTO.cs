@@ -11,7 +11,7 @@ namespace SwimmingApp.Abstract.DTO
     {
         public AttendanceDTO(AttendanceModel model)
         {
-            Id = model.Id;
+            ID_attendance = model.ID_attendance;
             AttDesc = model.AttDesc;
             Type = model.Type;
             MemberModel = model.MemberModel != null ? new MemberDTO(model.MemberModel) : null;

@@ -53,7 +53,7 @@ namespace SwimmingApp.DAL.Repositories.MemberService
         public async Task<MemberDTO> UpdateMember(MemberDTO memberDTO)
         {
             DynamicParameters param = new DynamicParameters();
-            param.Add("id", memberDTO.Id);
+            param.Add("id", memberDTO.ID_member);
             param.Add("name", memberDTO.Name);
             param.Add("surname", memberDTO.Surname);
             param.Add("member_from", memberDTO.MemberFrom);

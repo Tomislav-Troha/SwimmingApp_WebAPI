@@ -8,7 +8,7 @@ namespace SwimmingApp.Abstract.Data
 {
     public class Attendance
     {
-        public int Id { get; set; }
+        public int ID_attendance { get; set; }
         public string AttDesc { get; set; }
         public string Type { get; set; }
         public int MemberID { get; set; }

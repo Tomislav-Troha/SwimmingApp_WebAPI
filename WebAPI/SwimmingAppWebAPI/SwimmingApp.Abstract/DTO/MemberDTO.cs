@@ -11,7 +11,7 @@ namespace SwimmingApp.Abstract.DTO
     {
         public MemberDTO(MemberModel memberModel)
         {
-            Id = memberModel.Id;
+            ID_member = memberModel.ID_member;
             Name = memberModel.Name;
             Surname= memberModel.Surname;
             MemberFrom = memberModel.MemberFrom;
