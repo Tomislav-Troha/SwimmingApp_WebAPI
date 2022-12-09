@@ -16,5 +16,7 @@ namespace SwimmingApp.DAL.Repositories.UserService
         Task<UserModel> GetUserByUsername(string username);
         Task<UserModel> UpdateUser(UserModel userModel);
         Task<UserModel> DeleteUser(int id);
+        Task<UserRoleModel> SetUserRole(UserRoleModel model, int id);
+        Task<IEnumerable<UserModel>> GetUsersRoleNull();
     }
 }

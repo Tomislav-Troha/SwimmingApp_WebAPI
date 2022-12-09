@@ -21,5 +21,15 @@ namespace SwimmingApp.BL.Managers.UserManager
         {
             return await _userService.GetByID(id);
         }
+
+        public async Task<UserRoleModel> UserSetRole(UserRoleModel model, int id)
+        {
+            return await _userService.SetUserRole(model, id);
+        }
+
+        public async Task<IEnumerable<UserModel>> GetUserRoleNull()
+        {
+            return await _userService.GetUsersRoleNull();
+        }
     }
 }

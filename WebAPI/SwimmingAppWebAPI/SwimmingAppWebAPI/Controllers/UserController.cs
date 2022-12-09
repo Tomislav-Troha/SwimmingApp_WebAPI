@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SwimmingApp.Abstract.DataModel;
 using SwimmingApp.BL.Managers.UserManager;
 using System.ComponentModel.DataAnnotations;
 
@@ -14,12 +15,40 @@ namespace SwimmingAppWebAPI.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet]
+        [HttpGet("GetUseByID")]
         public async Task<IActionResult> GetUserByID(int id)
         {
             try
             {
                 var result = await _userManager.GetUserByID(id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> SetUserRole(UserRoleModel model, int id)
+        {
+            try
+            {
+                var result = await _userManager.UserSetRole(model, id);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e);
+            }
+        }
+
+        [HttpGet("UserRoleIsNull")]
+        public async Task<IActionResult> GetUserRoleNull()
+        {
+            try
+            {
+                var result = await _userManager.GetUserRoleNull();
                 return Ok(result);
             }
             catch (Exception e)

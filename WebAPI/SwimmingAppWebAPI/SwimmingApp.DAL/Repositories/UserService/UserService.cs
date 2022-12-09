@@ -81,6 +81,11 @@ namespace SwimmingApp.DAL.Repositories.UserService
             return await _db.FindAsync<UserModel>("SELECT * FROM User_Select_LoginData(@email)", param);
         }
 
+        public async Task<IEnumerable<UserModel>> GetUsersRoleNull()
+        {
+           return await _db.GetAsync<UserModel>("SELECT * FROM User_Select_RoleNull()");
+        }
+
         public async Task<UserModel> InsertUser(UserModel userModel)
         {
             DynamicParameters param = new DynamicParameters();
@@ -91,11 +96,21 @@ namespace SwimmingApp.DAL.Repositories.UserService
             param.Add("password", userModel.Password);
             param.Add("salt", userModel.Salt);
             param.Add("adress", userModel.Adress);
-            param.Add("userRoleID", userModel.UserRoleID);
 
-            await _db.InsertAsync("CALL User_Insert(@name, @surname, @email, @username, @password, @adress, @userRoleID, @salt)", param);
+            await _db.InsertAsync("CALL User_Insert(@name, @surname, @email, @username, @password, @adress, @salt)", param);
 
             return userModel;
+        }
+
+        public async Task<UserRoleModel> SetUserRole(UserRoleModel model, int id)
+        {
+            DynamicParameters param = new DynamicParameters();
+            param.Add("id", id);
+            param.Add("userRoleID", model.RoleId);
+
+            await _db.UpdateAsync("CALL User_SetRole(@id, @userRoleID)", param);
+
+            return model;
         }
 
         public Task<UserModel> UpdateUser(UserModel userModel)
