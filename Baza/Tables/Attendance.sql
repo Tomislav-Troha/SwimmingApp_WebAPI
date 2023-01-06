@@ -4,13 +4,15 @@ CREATE TABLE "Attendance" (
   "type" varchar,
   "memberID" int,
   "trainingID" int,
-  "userID" int
+  "userID" int,
+  "trainingDateID" int
 );
 
-ALTER TABLE "Attendance" ADD FOREIGN KEY ("employeeID") REFERENCES "Employee" ("id");
 
 ALTER TABLE "Attendance" ADD FOREIGN KEY ("memberID") REFERENCES "Member" ("id");
 
 ALTER TABLE "Attendance" ADD FOREIGN KEY ("trainingID") REFERENCES "Training" ("id");
 
 ALTER TABLE "Attendance" ADD FOREIGN KEY ("userID") REFERENCES "User" ("id");
+
+ALTER TABLE "Attendance" ADD FOREIGN KEY ("trainingDateID") REFERENCES "TrainingDate" ("id")

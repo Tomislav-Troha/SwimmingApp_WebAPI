@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SwimmingApp.BL.Managers.MemberManager
 {
-    public class MemberManager : IMemberManager
+    public class MemberManager
     {
         private readonly IMemberService _memberService;
         public MemberManager(IMemberService memberService)

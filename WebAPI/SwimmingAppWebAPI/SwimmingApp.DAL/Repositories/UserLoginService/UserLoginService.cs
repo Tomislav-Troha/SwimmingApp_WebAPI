@@ -30,6 +30,9 @@ namespace SwimmingApp.DAL.Repositories.UserLoginService
             if(response.Success)
             {
                 var userModel = await _userService.GetUserByEmail(request.Email);
+
+                //dodatno mozda jos uvesti UserLoginHistory
+
                 response.Token = TokenGenerator.CreateToken(userModel, _configuration);
             }
 

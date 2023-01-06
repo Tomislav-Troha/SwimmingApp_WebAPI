@@ -17,6 +17,8 @@ using SwimmingApp.DAL.Repositories.TrainingService;
 using SwimmingApp.BL.Managers.TrainingManager;
 using SwimmingApp.DAL.Repositories.AttendanceService;
 using SwimmingApp.BL.Managers.AttendanceManager;
+using SwimmingApp.DAL.Repositories.TrainingDateService;
+using SwimmingApp.BL.Managers.TrainingDateManager;
 
 internal class Program
 {
@@ -85,6 +87,9 @@ internal class Program
 
         services.AddScoped<IAttendanceService, AttendanceService>();
         services.AddTransient<AttendanceManager>();
+
+        services.AddScoped<ITrainingDateService, TrainingDateService>();
+        services.AddTransient<TrainingDateManager>();
 
         services.AddCors(p => p.AddPolicy("corsapp", builder =>
         {
