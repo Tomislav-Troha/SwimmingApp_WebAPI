@@ -17,11 +17,16 @@ namespace SwimmingApp.Abstract.DataModel
 
         public AttendanceModel(AttendanceModel model)
         {
-            MemberModel = new MemberModel(model.MemberModel);
+            UserModel = new UserModel(model.UserModel);
             TrainingModel = new TrainingModel(model.TrainingModel);
+            TrainingDateModel = new TrainingDateModel(model.TrainingDateModel);
+            UserRole = new UserRoleModel(model.UserRole);
         }
 
-        public MemberModel MemberModel { get; set; }
+        public UserModel UserModel{ get; set; }
         public TrainingModel TrainingModel { get; set; }
+        public TrainingDateModel TrainingDateModel { get; set; }
+
+        public UserRoleModel UserRole { get; set; }
     }
 }

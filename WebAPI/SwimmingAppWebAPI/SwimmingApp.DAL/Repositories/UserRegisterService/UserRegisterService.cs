@@ -36,7 +36,7 @@ namespace SwimmingApp.DAL.Repositories.UserRegisterService
                     Password = hashPassword,
                     Salt = salt,
                     Username = request.Username,
-                    Adress = request.Adress
+                    Addres = request.Addres
                 };
 
                 await _iuserService.InsertUser(userModel);

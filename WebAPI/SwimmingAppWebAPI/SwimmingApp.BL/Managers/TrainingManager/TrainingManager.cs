@@ -1,6 +1,5 @@
 ﻿using SwimmingApp.Abstract.DataModel;
 using SwimmingApp.Abstract.DTO;
-using SwimmingApp.DAL.Repositories.MemberService;
 using SwimmingApp.DAL.Repositories.TrainingService;
 using System;
 using System.Collections.Generic;

@@ -16,13 +16,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Filter\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SwimmingApp.DAL">
+      <HintPath>..\SwimmingApp.BL\bin\Debug\net6.0\SwimmingApp.DAL.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Filter\" />
   </ItemGroup>
 
 </Project>

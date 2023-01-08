@@ -34,6 +34,13 @@
   <ItemGroup>
     <ProjectReference Include="..\SwimmingApp.Abstract\SwimmingApp.Abstract.csproj" />
     <ProjectReference Include="..\SwimmingApp.BL\SwimmingApp.BL.csproj" />
+    <ProjectReference Include="..\SwimmingApp.DAL\SwimmingApp.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SwimmingApp.DAL">
+      <HintPath>..\SwimmingApp.BL\bin\Debug\net6.0\SwimmingApp.DAL.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

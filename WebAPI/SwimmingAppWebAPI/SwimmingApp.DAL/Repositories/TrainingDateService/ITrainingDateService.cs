@@ -10,7 +10,7 @@ namespace SwimmingApp.DAL.Repositories.TrainingDateService
 {
     public interface ITrainingDateService
     {
-        Task<TrainingDateDTO> InsertTrainingDate(TrainingDateDTO trainingDateDTO, int userID);
+        Task<TrainingDateDTO> InsertTrainingDate(List<TrainingDateDTO> trainingDateDTO, int userID);
 
         Task<TrainingDateDTO> UpdateTrainingDate(TrainingDateDTO trainingDateDTO);
 

@@ -16,11 +16,31 @@ namespace SwimmingApp.Abstract.DataModel
 
         public TrainingDateModel(TrainingDateModel model)
         {
-            MemberModel = new MemberModel(model.MemberModel);
+            UserModel = new UserModel(model.UserModel);
             TrainingModel = new TrainingModel(model.TrainingModel);
+            UserRole = new UserRoleModel(model.UserRole);
+
+            //if (model.MemberModelList != null)
+            //{
+            //    MemberModelList = new List<MemberModel>();
+            //    foreach (var memModel in model.MemberModelList)
+            //        MemberModelList.Add(new MemberModel(memModel));
+            //}
+
+            //if (model.TrainingModelList != null)
+            //{
+            //    TrainingModelList = new List<TrainingModel>();
+            //    foreach (var traModel in model.TrainingModelList)
+            //        TrainingModelList.Add(new TrainingModel(traModel));
+            //}
         }
 
-        public MemberModel MemberModel { get; set; }
+        //public List<MemberModel> MemberModelList { get; set; }
+        //public List<TrainingModel> TrainingModelList { get; set; }
+
+        public UserModel UserModel { get; set; }
         public TrainingModel TrainingModel { get; set; }
+
+        public UserRoleModel UserRole { get; set; }
     }
 }

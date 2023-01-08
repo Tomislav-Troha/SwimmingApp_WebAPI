@@ -14,8 +14,11 @@ namespace SwimmingApp.Abstract.DTO
             ID_attendance = model.ID_attendance;
             AttDesc = model.AttDesc;
             Type = model.Type;
-            MemberModel = model.MemberModel != null ? new MemberDTO(model.MemberModel) : null;
+            UserModel = model.UserModel != null ? new UserDTO(model.UserModel) : null;
             TrainingModel = model.TrainingModel != null ? new TrainingDTO(model.TrainingModel) : null;
+            TrainingDateModel = model.TrainingDateModel != null ? new TrainingDateDTO(model.TrainingDateModel) : null;
+            UserRole = model.UserRole != null ? new UserRoleDTO(model.UserRole) : null;
+
         }
 
         public AttendanceDTO()

@@ -37,9 +37,9 @@ namespace SwimmingApp.DAL.Repositories.TrainingService
         {
             DynamicParameters param = new DynamicParameters();
             param.Add("code", trainingDTO.Code);
-            param.Add("name", trainingDTO.TrainingType);
+            param.Add("trainingType", trainingDTO.TrainingType);
 
-            await _db.InsertAsync("CALL Training_Insert(@code, @name)", param);
+            await _db.InsertAsync("CALL Training_Insert(@code, @trainingType)", param);
 
             return trainingDTO;
         }
@@ -49,9 +49,9 @@ namespace SwimmingApp.DAL.Repositories.TrainingService
             DynamicParameters param = new DynamicParameters();
             param.Add("id", trainingDTO.ID_training);
             param.Add("code", trainingDTO.Code);
-            param.Add("name", trainingDTO.TrainingType);
+            param.Add("trainingType", trainingDTO.TrainingType);
 
-            await _db.UpdateAsync("CALL Training_Update(@id, @code, @name)", param);
+            await _db.UpdateAsync("CALL Training_Update(@id, @code, @trainingType)", param);
 
             return trainingDTO;
         }

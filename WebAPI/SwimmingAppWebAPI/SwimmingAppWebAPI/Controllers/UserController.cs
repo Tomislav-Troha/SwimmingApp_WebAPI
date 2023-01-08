@@ -15,7 +15,7 @@ namespace SwimmingAppWebAPI.Controllers
             _userManager = userManager;
         }
 
-        [HttpGet("GetUseByID")]
+        [HttpGet("GetUserByID")]
         public async Task<IActionResult> GetUserByID(int id)
         {
             try
@@ -29,7 +29,7 @@ namespace SwimmingAppWebAPI.Controllers
             }
         }
 
-        [HttpPut]
+        [HttpPut("SetUserRole")]
         public async Task<IActionResult> SetUserRole(UserRoleModel model, int id)
         {
             try

@@ -1,6 +1,4 @@
 using SwimmingApp.DAL.Core;
-using SwimmingApp.DAL.Repositories.MemberService;
-using SwimmingApp.BL.Managers.MemberManager;
 using SwimmingApp.DAL.Repositories.UserRegisterService;
 using SwimmingApp.DAL.Repositories.UserService;
 using SwimmingApp.BL.Managers.UserRegisterManager;
@@ -69,9 +67,6 @@ internal class Program
         services.AddSingleton<DapperContext>();
 
         services.AddScoped<IDbService, DbService>();
-
-        services.AddScoped<IMemberService, MemberService>();
-        services.AddTransient<MemberManager>();
 
         services.AddScoped<IUserService, UserService>();
         services.AddTransient<UserManager>();

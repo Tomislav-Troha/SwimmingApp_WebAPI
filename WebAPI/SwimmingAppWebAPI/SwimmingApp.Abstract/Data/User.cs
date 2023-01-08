@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace SwimmingApp.Abstract.Data
@@ -15,7 +16,7 @@ namespace SwimmingApp.Abstract.Data
         public string Username { get; set; }
         public byte[] Password { get; set; }
         public byte[] Salt { get; set; }
-        public string Adress { get; set; } 
+        public string Addres { get; set; } 
         public int UserRoleID { get; set; } 
     }
 }

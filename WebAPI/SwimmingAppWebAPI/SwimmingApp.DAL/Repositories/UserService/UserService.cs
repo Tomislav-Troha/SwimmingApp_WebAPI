@@ -41,7 +41,7 @@ namespace SwimmingApp.DAL.Repositories.UserService
                 {
                     user.UserRoleModel = userRole;
                     return user;
-                }, param, splitOn: "roleid");
+                }, param, splitOn: "roleID");
 
             return users.FirstOrDefault();
         }
@@ -95,7 +95,7 @@ namespace SwimmingApp.DAL.Repositories.UserService
             param.Add("username", userModel.Username);
             param.Add("password", userModel.Password);
             param.Add("salt", userModel.Salt);
-            param.Add("adress", userModel.Adress);
+            param.Add("adress", userModel.Addres);
 
             await _db.InsertAsync("CALL User_Insert(@name, @surname, @email, @username, @password, @adress, @salt)", param);
 

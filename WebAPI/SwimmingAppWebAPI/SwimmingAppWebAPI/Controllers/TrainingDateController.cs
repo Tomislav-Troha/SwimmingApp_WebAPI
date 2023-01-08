@@ -34,7 +34,7 @@ namespace SwimmingAppWebAPI.Controllers
 
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> InsertTrainingDate(TrainingDateDTO trainingDateDTO)
+        public async Task<IActionResult> InsertTrainingDate(List<TrainingDateDTO> trainingDateDTO)
         {
             try
             {
